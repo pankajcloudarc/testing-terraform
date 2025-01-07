@@ -1,12 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.78"
-    }
-  }
-  required_version = ">= 1.10.0"
-}
 
 resource "aws_vpc" "terraform_project_vpc" {
   cidr_block           = var.vpc_cidr
@@ -70,7 +61,7 @@ resource "aws_security_group" "terraform_project_sg" {
 resource "aws_instance" "terraform_project_instance" {
   ami                    = var.ami_id # Replace with correct AMI ID
   instance_type          = var.instance_type
-  key_name = var.key_name /* existing key */
+  key_name = var.key_name
   subnet_id              = aws_subnet.terraform_project_subnet.id
   vpc_security_group_ids = [aws_security_group.terraform_project_sg.id]
   associate_public_ip_address = true
